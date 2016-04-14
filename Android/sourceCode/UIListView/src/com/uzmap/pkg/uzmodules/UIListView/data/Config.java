@@ -34,7 +34,7 @@ public class Config {
 	public int leftBgColor = 0xFF5cacee;
 	public int rightBgColor = 0xFF6c7b8b;
 	public int borderColor = 0xFF696969;
-	public int borderWidth = 1;
+	public float borderWidth = 1;
 
 	// item style
 	public int itemBgColor = 0xFFAFEEEE;
@@ -150,7 +150,7 @@ public class Config {
 			}
 
 			if (!stylesObj.isNull("borderWidth")) {
-				borderWidth = stylesObj.optInt("borderWidth");
+				borderWidth = (float)stylesObj.optDouble("borderWidth");
 			}
 
 			JSONObject itemStyleObj = stylesObj.optJSONObject("item");

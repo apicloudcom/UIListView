@@ -189,9 +189,12 @@ public class ListAdapter extends BaseAdapter {
 		 * item border set
 		 */
 		viewHolder.mBorder.setBackgroundColor(config.borderColor);
+		
+		float borderHeight = Math.round(UZUtility.dipToPix(1) * config.borderWidth);
+		
 		RelativeLayout.LayoutParams borderParams = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.MATCH_PARENT,
-				UZUtility.dipToPix(config.borderWidth));
+				(int)borderHeight);
 		viewHolder.mBorder.setLayoutParams(borderParams);
 
 		/**

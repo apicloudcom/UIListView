@@ -128,12 +128,14 @@
     self.leftBtn = [paramsDict_ arrayValueForKey:@"leftBtns" defaultValue:nil];
     self.rightBtn = [paramsDict_ arrayValueForKey:@"rightBtns" defaultValue:nil];
     
+    BOOL bounces = [paramsDict_ boolValueForKey:@"bounces" defaultValue:NO];
     //初始化列表视图
     UITableView *tableViews = [[UITableView alloc]init];
     tableViews.frame = CGRectMake(viewx, viewy, viewwidth, viewheight);
     tableViews.delegate = self;
     tableViews.dataSource = self;
     tableViews.tag = 987;
+    tableViews.bounces = bounces;
     tableViews.backgroundColor = [UIColor clearColor];
     tableViews.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.mainTableView = tableViews;

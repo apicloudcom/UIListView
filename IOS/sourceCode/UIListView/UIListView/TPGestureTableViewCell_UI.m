@@ -197,14 +197,14 @@ typedef enum {
         //分割线
         _seperateLineUI = [[SeperateLineUI alloc]initWithFrame:CGRectZero];
         _seperateLineUI.colors = borderColor;
-        _seperateLineUI.frame=CGRectMake(-self.frame.size.width, 0, self.bounds.size.width*3,borderWidth);
+        _seperateLineUI.frame=CGRectMake(-self.frame.size.width, 0, self.bounds.size.width*10,borderWidth);
         _seperateLineUI.backgroundColor = [UZAppUtils colorFromNSString:borderColor];
         [self.contentView addSubview:_seperateLineUI];
         _originalCenter= [UIScreen mainScreen].bounds.size.width / 2.0;
         //下分割线
         _botLine = [[UIView alloc]initWithFrame:CGRectZero];
         _botLine.backgroundColor = [UZAppUtils colorFromNSString:borderColor];
-        _botLine.frame=CGRectMake(-self.frame.size.width, cellHeight-borderWidth, self.bounds.size.width*3,borderWidth);
+        _botLine.frame = CGRectMake(-self.frame.size.width, cellHeight-borderWidth, self.bounds.size.width*10,borderWidth);
         _botLine.hidden = YES;
         [self.contentView addSubview:_botLine];
         

@@ -226,11 +226,13 @@
 
 - (void)setRefreshHeader:(NSDictionary *)paramsDict_{
     refreshHeadcbid = [paramsDict_ integerValueForKey:@"cbId" defaultValue:-1];
+    self.mainTableView.bounces = YES;
     [self createHeaderView:paramsDict_];
 }
 
 - (void)setRefreshFooter:(NSDictionary *)paramsDict_{
     refreshFootercbid = [paramsDict_ integerValueForKey:@"cbId" defaultValue:-1];
+    self.mainTableView.bounces = YES;
     [self setFooterView:paramsDict_];
 }
 

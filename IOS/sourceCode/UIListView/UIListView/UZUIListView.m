@@ -129,6 +129,8 @@
     self.rightBtn = [paramsDict_ arrayValueForKey:@"rightBtns" defaultValue:nil];
     
     BOOL bounces = [paramsDict_ boolValueForKey:@"bounces" defaultValue:NO];
+    BOOL showScrollBar = [paramsDict_ boolValueForKey:@"showScrollBar" defaultValue:YES];
+
     //初始化列表视图
     UITableView *tableViews = [[UITableView alloc]init];
     tableViews.frame = CGRectMake(viewx, viewy, viewwidth, viewheight);
@@ -138,6 +140,7 @@
     tableViews.bounces = bounces;
     tableViews.backgroundColor = [UIColor clearColor];
     tableViews.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableViews.showsVerticalScrollIndicator = showScrollBar;
     self.mainTableView = tableViews;
     
     //添加到指定窗口

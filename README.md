@@ -36,6 +36,7 @@ UIListView 模块封装了一个数据列表控件，列表项水平侧滑可出
 ![图片说明](http://docs.apicloud.com/img/docImage/listView.jpg)
 
 <div id="open"></div>
+
 # **open**
 
 打开 UIListView 模块
@@ -298,6 +299,7 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="close"></div>
+
 # **close**
 
 关闭数据列表模块
@@ -318,6 +320,7 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="show"></div>
+
 # **show**
  
 显示 UIListView 模块
@@ -338,6 +341,7 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="hide"></div>
+
 # **hide**
  
 隐藏 UIListView 模块
@@ -358,6 +362,7 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="setAttr"></div>
+
 # **setAttr**
 
 设置列表的纵坐标和高度
@@ -414,6 +419,7 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="getIndex"></div>
+
 # **getIndex**
 
 根据开发者自定义的唯一标识（open 接口的 data 参数中自定义的唯一标识）查找列表项对应的数据
@@ -469,6 +475,7 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="getDataByIndex"></div>
+
 # **getDataByIndex**
 
 根据列表项的索引获取对应的数据
@@ -518,6 +525,7 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="setSwipeBtns"></div>
+
 # **setSwipeBtns**
 
 设置侧滑显示出来的按钮
@@ -596,6 +604,7 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="reloadData"></div>
+
 # **reloadData**
 
 刷新列表数据
@@ -662,6 +671,7 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
  
 <div id="deleteItem"></div>
+
 # **deleteItem**
 
 根据索引删除某一条列表的数据
@@ -711,6 +721,7 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
  
 <div id="updateItem"></div>
+
 # **updateItem**
 
 根据索引更新某一条列表的数据
@@ -783,6 +794,7 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
  
 <div id="insertItem"></div>
+
 # **insertItem**
 
 根据索引向某一条列表插入数据
@@ -855,6 +867,7 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
  
 <div id="appendData"></div>
+
 # **appendData**
  
 向列表末端追加数据
@@ -920,6 +933,7 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="getCount"></div>
+
 # **getCount**
  
 获取当前列表的总数据量
@@ -956,6 +970,7 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="setRefreshHeader"></div>
+
 # **setRefreshHeader**
  
 设置下拉刷新，**通过 reloadData 收起下拉刷新组件**
@@ -1043,6 +1058,7 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="setRefreshFooter"></div>
+
 # **setRefreshFooter**
  
 设置上拉加载，**通过 appendData 收起上拉加载组件**

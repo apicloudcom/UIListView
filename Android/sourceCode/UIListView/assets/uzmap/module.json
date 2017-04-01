@@ -1,8 +1,0 @@
-{
-	modules:[
-		{
-			name:'UIListView',
-			class:"com.uzmap.pkg.uzmodules.UIListView.UIListView"
-		}
-	]
-}

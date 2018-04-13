@@ -74,6 +74,7 @@ data：
     subTitle: '',           //（可选项）字符串类型；子标题，若不传或为空则 title 上下位置居中显示
     remark: '',             //（可选项）字符串类型；右边备注文字
     icon: '',               //（可选项）字符串类型；右侧备注的图标路径（本地路径，支持fs://、widget://）
+    forbidden: false,       //（可选项）布尔类型；是否屏蔽本条数据的点击事件和侧滑露出按钮功能，屏蔽后的样式可通过 styles->forbidden参数配置
     rightBtns: []           //（可选项）数组类型；列表项向左滑动露出的按钮组，配置某一项的特定按钮组，若不传则显示通用按钮，内部字段同下方 rightBtns 参数
 }]
 ```
@@ -127,6 +128,13 @@ styles:
         remarkColor: '#000',            //（可选项）字符串类型；备注的文字颜色，支持 rgb、rgba、#；默认：'#000000'
         remarkSize: 16,                 //（可选项）数字类型；备注的文字大小；默认：16
         remarkIconWidth: 30              //（可选项）数字类型；当备注是图片时，图片的宽度，图片为正方形；默认：30
+    }，
+    forbidden: {                        //（可选项）JSON对象；屏蔽点击事件的列表项的样式配置
+        bgColor: '#B0C4DE',             //（可选项）字符串类型；列表项背景色，支持rgb、#、rgba；默认：#C0C0C0
+        titleColor: '800000',           //（可选项）字符串类型；列表项标题色，支持rgb、#、rgba；默认：#808080
+        subTitleColor: '#696969',       //（可选项）字符串类型；列表项子标题色，支持rgb、#、rgba；默认：#808080
+        remarkColor: '#FFDEAD',         //（可选项）字符串类型；列表项备注色，支持rgb、#、rgba；默认：#808080
+        sideslip: false                 //（可选项）布尔类型；是否只屏蔽侧滑；默认：false（侧滑和点击事件都屏蔽）
     }
 }
 ```
@@ -299,7 +307,6 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="close"></div>
-
 # **close**
 
 关闭数据列表模块
@@ -320,7 +327,6 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="show"></div>
-
 # **show**
  
 显示 UIListView 模块
@@ -341,7 +347,6 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="hide"></div>
-
 # **hide**
  
 隐藏 UIListView 模块
@@ -362,7 +367,6 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="setAttr"></div>
-
 # **setAttr**
 
 设置列表的纵坐标和高度
@@ -419,7 +423,6 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="getIndex"></div>
-
 # **getIndex**
 
 根据开发者自定义的唯一标识（open 接口的 data 参数中自定义的唯一标识）查找列表项对应的数据
@@ -475,7 +478,6 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="getDataByIndex"></div>
-
 # **getDataByIndex**
 
 根据列表项的索引获取对应的数据
@@ -525,7 +527,6 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="setSwipeBtns"></div>
-
 # **setSwipeBtns**
 
 设置侧滑显示出来的按钮
@@ -604,7 +605,6 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="reloadData"></div>
-
 # **reloadData**
 
 刷新列表数据
@@ -626,6 +626,7 @@ data：
     subTitle: '',           //（可选项）字符串类型；子标题，若不传或为空则 title 上下位置居中显示
     remark: '',             //（可选项）字符串类型；右边备注文字
     icon: '',               //（可选项）字符串类型；右侧备注的图标路径（本地路径，支持fs://、widget://）
+    forbidden: false,       //（可选项）布尔类型；是否屏蔽本条数据的点击事件，屏蔽后的样式可通过 open->styles->forbidden参数配置
     rightBtns: []           //（可选项）数组类型；列表项向左滑动露出的按钮组，配置某一项的特定按钮组，若不传则显示通用按钮，内部字段同 rightBtns 参数
 }]
 ```
@@ -671,7 +672,6 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
  
 <div id="deleteItem"></div>
-
 # **deleteItem**
 
 根据索引删除某一条列表的数据
@@ -721,7 +721,6 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
  
 <div id="updateItem"></div>
-
 # **updateItem**
 
 根据索引更新某一条列表的数据
@@ -749,6 +748,7 @@ data：
     subTitle: '',           //（可选项）字符串类型；子标题，若不传或为空则 title 上下位置居中显示
     remark: '',             //（可选项）字符串类型；右边备注文字
     icon: '',               //（可选项）字符串类型；右侧备注的图标路径（本地路径，支持fs://、widget://）
+    forbidden: false,       //（可选项）布尔类型；是否屏蔽本条数据的点击事件，屏蔽后的样式可通过 open->styles->forbidden参数配置
     rightBtns: []           //（可选项）数组类型；列表项向左滑动露出的按钮组，配置某一项的特定按钮组，若不传则显示通用按钮，内部字段同 rightBtns 参数
 }
 ```
@@ -794,7 +794,6 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
  
 <div id="insertItem"></div>
-
 # **insertItem**
 
 根据索引向某一条列表插入数据
@@ -822,6 +821,7 @@ data：
     subTitle: '',           //（可选项）字符串类型；子标题，若不传或为空则 title 上下位置居中显示
     remark: '',             //（可选项）字符串类型；右边备注文字
     icon: '',               //（可选项）字符串类型；右侧备注的图标路径（本地路径，支持fs://、widget://）
+    forbidden: false,       //（可选项）布尔类型；是否屏蔽本条数据的点击事件，屏蔽后的样式可通过 open->styles->forbidden参数配置
     rightBtns: []           //（可选项）数组类型；列表项向左滑动露出的按钮组，配置某一项的特定按钮组，内部字段同 open 接口的 rightBtns 参数
 }
 ```
@@ -867,7 +867,6 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
  
 <div id="appendData"></div>
-
 # **appendData**
  
 向列表末端追加数据
@@ -889,6 +888,7 @@ data：
     subTitle: '',           //（可选项）字符串类型；子标题，若不传或为空则 title 上下位置居中显示
     remark: '',             //（可选项）字符串类型；右边备注文字
     icon: '',               //（可选项）字符串类型；右侧备注的图标路径（本地路径，支持fs://、widget://）
+    forbidden: false,       //（可选项）布尔类型；是否屏蔽本条数据的点击事件，屏蔽后的样式可通过 open->styles->forbidden参数配置
     rightBtns: []           //（可选项）数组类型；列表项向左滑动露出的按钮组，配置某一项的特定按钮组，内部字段同 open 接口的 rightBtns 参数
 }]
 ```
@@ -933,7 +933,6 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="getCount"></div>
-
 # **getCount**
  
 获取当前列表的总数据量
@@ -970,7 +969,6 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="setRefreshHeader"></div>
-
 # **setRefreshHeader**
  
 设置下拉刷新，**通过 reloadData 收起下拉刷新组件**
@@ -1058,7 +1056,6 @@ iOS系统，Android系统
 可提供的1.0.0及更高版本
 
 <div id="setRefreshFooter"></div>
-
 # **setRefreshFooter**
  
 设置上拉加载，**通过 appendData 收起上拉加载组件**

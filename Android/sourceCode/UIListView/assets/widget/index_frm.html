@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>WinA</title>
+    <link rel="stylesheet" type="text/css" href="css/api.css" />
+    <link rel="stylesheet" type="text/css" href="css/box.css" />
+    <script type="text/javascript" src="script/public.js"></script>
+    <style>
+    	p{
+    		color:#999;
+    		padding:5px;
+    	}
+    </style>
+	<script type="text/javascript">
+	    
+	    function openListView(){
+	    	var UIListView = api.require('UIListView');
+			UIListView.open({
+    			rect:{
+        			x: 0,
+        			y: 0,
+        			w: api.winWidth,
+        			h: api.frameHeight
+    			},
+    			data:[{
+        			uid: '1001',
+        			imgPath: 'widget://res/img/apicloud.png',
+        			title: '标题',
+        			subTitle: '子标题，说明文字',
+        			remark: '备注',
+        			icon: ''
+    			}, {
+        			uid: '1001',
+        			imgPath: 'widget://res/img/apicloud.png',
+        			title: '标题',
+        			subTitle: '子标题，说明文字',
+        			remark: '备注',
+        			icon: ''
+    			}, {
+        			uid: '1001',
+        			imgPath: 'widget://res/img/apicloud.png',
+        			title: '标题',
+        			subTitle: '子标题，说明文字',
+        			remark: '备注',
+        			icon: ''
+    			}, {
+        			uid: '1001',
+        			imgPath: 'widget://res/img/apicloud.png',
+        			title: '标题',
+        			subTitle: '子标题，说明文字',
+        			remark: '备注',
+        			icon: ''
+    			}, {
+        			uid: '1001',
+        			imgPath: 'widget://res/img/apicloud.png',
+        			title: '标题',
+        			subTitle: '子标题，说明文字',
+        			remark: '备注',
+        			icon: ''
+    			}, {
+        			uid: '1001',
+        			imgPath: 'widget://res/img/apicloud.png',
+        			title: '标题',
+        			subTitle: '子标题，说明文字',
+        			remark: '备注',
+        			icon: ''
+    			}, {
+        			uid: '1001',
+        			imgPath: 'widget://res/img/apicloud.png',
+        			title: '标题',
+        			subTitle: '子标题，说明文字',
+        			remark: '备注',
+        			icon: ''
+    			}, {
+        			uid: '1001',
+        			imgPath: 'widget://res/img/apicloud.png',
+        			title: '标题',
+        			subTitle: '子标题，说明文字',
+        			remark: '备注',
+        			icon: ''
+    			}, {
+        			uid: '1001',
+        			imgPath: 'widget://res/img/apicloud.png',
+        			title: '标题',
+        			subTitle: '子标题，说明文字',
+        			remark: '备注',
+        			icon: ''
+    			}],
+    			rightBtns: [{
+        			bgColor: '#388e8e',
+        			activeBgColor: '',
+        			width: 70,
+        			title: '按钮',
+        			titleSize: 12,
+        			titleColor: '#fff',
+        			icon: '',
+        			iconWidth: 20
+    			}],
+    			styles: {
+       				borderColor: '#696969',
+        			item: {
+            			bgColor: '#AFEEEE',
+            			activeBgColor: '#F5F5F5',
+            			height: 55.0,
+            			imgWidth: 40,
+            			imgHeight: 40,
+            			imgCorner: 4,
+            			placeholderImg: '',
+            			titleSize: 12.0,
+            			titleColor: '#000',
+            			subTitleSize: 12.0,
+            			subTitleColor: '#000',
+            			remarkColor: '#000',
+            			remarkSize: 16,
+            			remarkIconWidth: 30
+        			}
+    			},
+    			fixedOn:api.frameName
+			}, function(ret, err) {
+    			if (ret) {
+        			alert(JSON.stringify(ret));
+    			} else {
+        			alert(JSON.stringify(err));
+    			}
+			});
+	    }
+	</script>
+</head>
+<body>
+    <div id="wrap">
+        <div id="main">
+        	
+			<div class='itemtitle'>打开列表</div>
+				<div class="clickbtn" tapmode="active" onclick="openListView()" > openListView </div>     
+			
+	</div>
+</body>
+</html>

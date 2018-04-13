@@ -136,7 +136,7 @@ typedef enum {
         if (iconWidth>cellHeight || iconx>15) {
             iconx = 10;
         }
-        AsyncImageViewUI *iconView=[[AsyncImageViewUI alloc]initWithFrame:CGRectMake(iconx, icony,iconWidth, iconHeight)];
+       UIImageView  *iconView=[[UIImageView alloc]initWithFrame:CGRectMake(iconx, icony,iconWidth, iconHeight)];
         iconView.clipsToBounds = YES;
         self.iconImg=iconView;
         [self.contentView addSubview:self.iconImg];
@@ -197,16 +197,17 @@ typedef enum {
         //分割线
         _seperateLineUI = [[SeperateLineUI alloc]initWithFrame:CGRectZero];
         _seperateLineUI.colors = borderColor;
-        _seperateLineUI.frame=CGRectMake(-self.frame.size.width, 0, self.bounds.size.width*10,borderWidth);
+        _seperateLineUI.frame=CGRectMake(-self.frame.size.width, 0, self.bounds.size.width*10,borderWidth/2.0);
         _seperateLineUI.backgroundColor = [UZAppUtils colorFromNSString:borderColor];
         [self.contentView addSubview:_seperateLineUI];
         _originalCenter= [UIScreen mainScreen].bounds.size.width / 2.0;
         //下分割线
         _botLine = [[UIView alloc]initWithFrame:CGRectZero];
         _botLine.backgroundColor = [UZAppUtils colorFromNSString:borderColor];
-        _botLine.frame = CGRectMake(-self.frame.size.width, cellHeight-borderWidth, self.bounds.size.width*10,borderWidth);
+        _botLine.frame = CGRectMake(-self.frame.size.width, cellHeight-borderWidth/2.0, self.bounds.size.width*10,borderWidth/2.0);
         _botLine.hidden = YES;
         [self.contentView addSubview:_botLine];
+        //self.separatorInset = UIEdgeInsetsMake(borderWidth/2.0, 0, borderWidth/2.0, 0);
         
         //添加手势事件
         _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureHandle:)];
@@ -453,18 +454,27 @@ typedef enum {
 }
 
 - (void)tapHandle:(UIButton *)gesture {
+    if (self.forbiddenClick) {
+        return;
+    }
     if ([self.delegate respondsToSelector:@selector(cellDidSelectAvatar:)]) {
         [self.delegate cellDidSelectAvatar:self];
     }
 }
 
 - (void)tapHandleArrowBtn:(UIButton *)btn {
+    if (self.forbiddenClick) {
+        return;
+    }
     if ([self.delegate respondsToSelector:@selector(cellDidSelectArrow:)]) {
         [self.delegate cellDidSelectArrow:self];
     }
 }
 
 - (void)panGestureHandle:(UIPanGestureRecognizer *)recognizer{
+    if (self.forbiddenClick) {
+        return;
+    }
     if (recognizer.state == UIGestureRecognizerStateBegan){
         _initialTouchPositionX = [recognizer locationInView:self].x;
         _initialHorizontalCenter = self.contentView.center.x;

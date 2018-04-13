@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AsyncImageViewUI.h"
-
+#import <UIKit/UIKit.h>
 typedef enum {
     kFeedStatusNormal = 0,
     kFeedStatusLeftExpanded,
@@ -35,12 +34,12 @@ typedef enum {
 
 @property (nonatomic, assign) id<TPGestureTableViewCellDelegate> delegate;
 @property (nonatomic, assign) kFeedStatus currentStatusUI;
-@property (nonatomic, assign) BOOL revealingUI;
+@property (nonatomic, assign) BOOL revealingUI, forbiddenClick;
 @property (nonatomic,assign) float slipDistanceUI;
 @property (nonatomic,assign) float slipLeftDistance;
 @property (nonatomic, copy) NSArray *leftBtnUI;//左边的按钮
 @property (nonatomic, copy) NSArray *rightBtn;//右边的按钮
-@property (nonatomic, retain) AsyncImageViewUI *iconImg;
+@property (nonatomic, retain) UIImageView *iconImg;
 @property (nonatomic, retain) UILabel *titleLabel;
 @property (nonatomic, retain) UILabel *detailTextViewUI;
 @property (nonatomic, assign) NSInteger cellIndex;

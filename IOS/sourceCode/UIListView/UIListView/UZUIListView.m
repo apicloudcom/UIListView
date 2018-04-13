@@ -11,7 +11,7 @@
 #import "TPGestureTableViewCell_UI.h"
 #import "UZUIRefreshTableHeaderView.h"
 #import "UZUIRefreshTableFooterView.h"
-
+#import "UIImageView+WebCache.h"
 @interface UZUIListView ()
 <UITableViewDelegate,UITableViewDataSource, TPGestureTableViewCellDelegate, EGORefreshTableDelegate> {
     NSInteger cbID, refreshHeadcbid, refreshFootercbid;;
@@ -575,7 +575,7 @@
     }
     //背景设置
     cell.contentView.backgroundColor = [UZAppUtils colorFromNSString:cellBgColor];
-    cell.backgroundColor = [UZAppUtils colorFromNSString:cellBgColor];
+    //cell.backgroundColor = [UZAppUtils colorFromNSString:cellBgColor];
     NSDictionary *cellInfo = [self.dataSource objectAtIndex:indexPath.row];
     if (![cellInfo isKindOfClass:[NSDictionary class]]) {
         cellInfo = @{};
@@ -637,29 +637,31 @@
     cell.arrowBtn.frame = CGRectMake(arrowX,0,arrowWidth,cellHeight);
     //头像
     UIImage *placeholdImg = [UIImage imageWithContentsOfFile:self.headerPlaceImg];
-    NSString *headImg = [cellInfo stringValueForKey:@"imgPath" defaultValue:nil];
-    if ([headImg isKindOfClass:[NSString class]] && headImg.length>0) {
-        if ([headImg hasPrefix:@"http"]) {
-            if (placeholdImg) {
-                [cell.iconImg loadImage:headImg withPlaceholdImage:placeholdImg];
-            } else {
-                NSString *placeholdImgStr = [[NSBundle mainBundle]pathForResource:@"res_UIListView/apicloud" ofType:@"png"];
-                [cell.iconImg loadImage:headImg withPlaceholdImage:[UIImage imageWithContentsOfFile:placeholdImgStr]];
-            }
+    NSString *headImg = [cellInfo stringValueForKey:@"imgPath" defaultValue:@""];
+    if ([headImg hasPrefix:@"http"]||[headImg hasPrefix:@"https"]) {
+        if (placeholdImg) {
+            [cell.iconImg sd_setImageWithURL:[NSURL URLWithString:headImg] placeholderImage:placeholdImg];
         } else {
-            UIImage *locImg = [UIImage imageWithContentsOfFile:[self getPathWithUZSchemeURL:headImg]];
-            if (locImg) {
-                [cell.iconImg setImage:locImg];
-            } else {
-                [cell.iconImg setImage:placeholdImg];
-            }
+            NSString *placeholdImgStr = [[NSBundle mainBundle]pathForResource:@"res_UIListView/apicloud" ofType:@"png"];
+            [cell.iconImg sd_setImageWithURL:[NSURL URLWithString:headImg] placeholderImage:[UIImage imageWithContentsOfFile:placeholdImgStr]];
+            
         }
-    } else {
-        [cell.iconImg setImage:placeholdImg ];
-        cell.iconImg.image = [UIImage imageNamed:@""];
+    }else {
+        
+        if ([self getPathWithUZSchemeURL:headImg]) {
+            [cell.iconImg setImage:[UIImage imageNamed:[self getPathWithUZSchemeURL:headImg]]];
+
+        }else if(placeholdImg){
+            [cell.iconImg setImage:placeholdImg];
+
+        }
+        
     }
     //判断是否有图片。来决定是否修改title，subtitle的坐标
-    if (headImg) {
+    cell.iconImg.hidden = NO;
+
+    UIImage *imageHead = [UIImage imageNamed: [self getPathWithUZSchemeURL:headImg]];
+    if ( imageHead || [headImg hasPrefix:@"http"]||[headImg hasPrefix:@"https"] ) {
         CGRect titleRect = cell.titleLabel.frame;
         CGRect detailRect =  cell.detailTextViewUI.frame;
         titleRect.origin.x = cell.iconImg.frame.size.width+cell.iconImg.frame.origin.x*2;
@@ -668,6 +670,7 @@
         detailRect.size.width = self.mainTableView.frame.size.width - detailRect.origin.x;
         cell.titleLabel.frame = titleRect;
         cell.detailTextViewUI.frame = detailRect;
+        cell.iconImg.hidden = NO;
     } else {
         CGRect titleRect = cell.titleLabel.frame;
         CGRect detailRect =  cell.detailTextViewUI.frame;
@@ -677,6 +680,7 @@
         detailRect.size.width = self.mainTableView.frame.size.width - 10;
         cell.titleLabel.frame = titleRect;
         cell.detailTextViewUI.frame = detailRect;
+        cell.iconImg.hidden = YES;
     }
     NSString *title = [cellInfo stringValueForKey:@"title" defaultValue:@""];
     cell.titleLabel.text = title;
@@ -770,20 +774,43 @@
     } else {
         cell.botLine.hidden = YES;
     }
+    cell.botLine.hidden = NO;
+    BOOL forbidden = [cellInfo boolValueForKey:@"forbidden" defaultValue:NO];
+    if (forbidden) {
+        NSDictionary *forbiddenDict = [_styles dictValueForKey:@"forbidden" defaultValue:@{}];
+        NSString *bgColor = [forbiddenDict stringValueForKey:@"bgColor" defaultValue:@"#C0C0C0"];
+        NSString *titleColor = [forbiddenDict stringValueForKey:@"titleColor" defaultValue:@"#808080"];
+        NSString *subTitleColor = [forbiddenDict stringValueForKey:@"subTitleColor" defaultValue:@"#808080"];
+        NSString *remarkColor = [forbiddenDict stringValueForKey:@"remarkColor" defaultValue:@"#808080"];
+        cell.contentView.backgroundColor = [UZAppUtils colorFromNSString:bgColor];
+        cell.titleLabel.textColor = [UZAppUtils colorFromNSString:titleColor];
+        cell.detailTextViewUI.textColor = [UZAppUtils colorFromNSString:subTitleColor];
+        cell.remark.textColor = [UZAppUtils colorFromNSString:remarkColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    } else {
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    }
+    cell.forbiddenClick = forbidden;
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *cellInfo = [self.dataSource objectAtIndex:indexPath.row];
+    BOOL forbidden = [cellInfo boolValueForKey:@"forbidden" defaultValue:NO];
+    if (forbidden) {
+        return;
+    }
     TPGestureTableViewCell_UI *cell = (TPGestureTableViewCell_UI*)[tableView cellForRowAtIndexPath:indexPath];
-    if(cell.revealingUI==YES){
+    if(cell.revealingUI){//侧滑按钮是否已经露出
         cell.revealingUI = NO;
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
         return;
     }
-    [self performSelector:@selector(deselect:) withObject:cell afterDelay:0.3f];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    //[self performSelector:@selector(deselect:) withObject:cell afterDelay:0.1f];
     self.currentCell.revealingUI = NO;
-    NSMutableDictionary *cbsenddict = [NSMutableDictionary dictionaryWithCapacity:2];
+    NSMutableDictionary *cbsenddict = [NSMutableDictionary dictionary];
     [cbsenddict setObject:[NSNumber numberWithInteger:cell.cellIndex] forKey:@"index"];
     [cbsenddict setObject:@"clickContent" forKey:@"eventType"];
     [self sendResultEventWithCallbackId:cbID dataDict:cbsenddict errDict:nil doDelete:NO];
@@ -791,10 +818,6 @@
 
 - (void)deselect:(TPGestureTableViewCell_UI *)cell{
     [mainTableView deselectRowAtIndexPath:[mainTableView indexPathForCell:cell] animated:YES];
-}
-
--(void)deselectNoAnimate:(TPGestureTableViewCell_UI *)cell{
-    [mainTableView deselectRowAtIndexPath:[mainTableView indexPathForCell:cell] animated:NO];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -835,11 +858,13 @@
 }
 
 - (void)cellDidSelectAvatar:(TPGestureTableViewCell_UI *)cell{
+    
     self.currentCell.revealingUI = NO;
     NSMutableDictionary *cbsenddict = [NSMutableDictionary dictionaryWithCapacity:2];
     [cbsenddict setObject:[NSNumber numberWithInteger:cell.cellIndex] forKey:@"index"];
     [cbsenddict setObject:@"clickImg" forKey:@"eventType"];
     [self sendResultEventWithCallbackId:cbID dataDict:cbsenddict errDict:nil doDelete:NO];
+ 
 }
 
 - (void)cellDidSelectArrow:(TPGestureTableViewCell_UI *)cell{
@@ -863,6 +888,7 @@
     }
     if (_refreshFooterView){
         [_refreshFooterView egoRefreshScrollViewDidScroll:scrollView];
+        [self setFooterView:nil];
     }
 }
 

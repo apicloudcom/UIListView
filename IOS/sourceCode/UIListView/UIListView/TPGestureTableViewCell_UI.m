@@ -136,7 +136,8 @@ typedef enum {
         if (iconWidth>cellHeight || iconx>15) {
             iconx = 10;
         }
-       UIImageView  *iconView=[[UIImageView alloc]initWithFrame:CGRectMake(iconx, icony,iconWidth, iconHeight)];
+       AsyncImageViewDX  *iconView=[[AsyncImageViewDX alloc]initWithFrame:CGRectMake(iconx, icony,iconWidth, iconHeight)];
+//        UIImageView  *iconView=[[UIImageView alloc]initWithFrame:CGRectMake(iconx, icony,iconWidth, iconHeight)];
         iconView.clipsToBounds = YES;
         self.iconImg=iconView;
         [self.contentView addSubview:self.iconImg];

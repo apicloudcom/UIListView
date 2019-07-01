@@ -1,4 +1,8 @@
 {
-			name:'UIListView',
-			class:"com.uzmap.pkg.uzmodules.UIListView.UIListView"
+	"modules":[
+		{
+			"name":"UIListView",
+			"class":"com.uzmap.pkg.uzmodules.UIListView.UIListView"
+		}	
+	]
 }

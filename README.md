@@ -4,9 +4,9 @@
 
 APICloud 的 UIListView 模块是对原生 listView 控件的封装。目的是为了让 APICloud 的广大开发者只需用 html+js 即可快速、高效的集成炫酷的列表模块。本模块最大的特定是实现了 item（cell）的侧滑效果，有效的解决了 html+js 代码在手机上运行不流畅的问题。由于本模块 UI 布局界面为固定模式，不能满足日益增长的广大开发者对侧滑列表模块样式的需求。因此，广大原生模块开发者，可以参考此模块的开发方式、接口定义等开发规范，或者基于此模块开发出更多符合产品设计的新 UI 布局的模块，希望此模块能起到抛砖引玉的作用。
 
-# **模块接口文档**
+# **模块接口文档** 
 
-<p style="color: #ccc; margin-bottom: 30px;">来自于：APICloud 官方</p>
+<p style="color: #ccc; margin-bottom: 30px;">来自于：APICloud 官方<a style="background-color: #95ba20; color:#fff; padding:4px 8px;border-radius:5px;margin-left:30px; margin-bottom:0px; font-size:12px;text-decoration:none;" target="_blank" href="//www.apicloud.com/mod_detail/UIListView">立即使用</a></p>
 
 <div class="outline">
 
@@ -29,9 +29,15 @@ APICloud 的 UIListView 模块是对原生 listView 控件的封装。目的是�
 
 </div>
 
-## **模块概述**
+# 论坛示例
 
-UIListView 模块封装了一个数据列表控件，列表项水平侧滑可出现控制按钮；开发者可自定义列表的数据源，及列表的样式，支持列表项的增、删、改、查，支持批量更新、追加数据，支持下拉刷新和上拉加载事件。**UIListView 模块是 listView 模块的优化版。**本模块的源码开源地址为：[https://github.com/apicloudcom/UIListView](https://github.com/apicloudcom/UIListView)
+为帮助用户更好更快的使用模块，论坛维护了一个[示例](https://community.apicloud.com/bbs/thread-115604-1-1.html)，示例中包含示例代码、知识点讲解、注意事项等，供您参考。
+
+
+# **概述**
+
+UIListView 模块封装了一个数据列表控件，列表项水平侧滑可出现控制按钮；开发者可自定义列表的数据源，及列表的样式，支持列表项的增、删、改、查，支持批量更新、追加数据，支持下拉刷新和上拉加载事件。**UIListView 模块是 listView 模块的优化版。** 
+
 
 ![图片说明](http://docs.apicloud.com/img/docImage/listView.jpg)
 
@@ -56,8 +62,8 @@ rect：
 {
     x: 0,   //（可选项）数字类型；模块左上角的 x 坐标（相对于所属的 Window 或 Frame）；默认值：0
     y: 0,   //（可选项）数字类型；模块左上角的 y 坐标（相对于所属的 Window 或 Frame）；默认值：0
-    w: 320, //（可选项）数字类型；模块的宽度；默认值：所属的 Window 或 Frame 的宽度
-    h: 480  //（可选项）数字类型；模块的高度；默认值：所属的 Window 或 Frame 的高度
+    w: 320, //（可选项）数字类型；模块的宽度，支持设置'auto'；默认值：所属的 Window 或 Frame 的宽度
+    h: 480  //（可选项）数字类型；模块的高度，支持设置'auto'；默认值：所属的 Window 或 Frame 的高度
 }
 ```
 
@@ -168,6 +174,7 @@ ret：
                         //clickContent（点击列表项的内容，除了配图和备注以外的区域）
                         //clickImg（点击列表项的配图）
                         //clickRemark（点击列表项右侧备注）
+                        //longPress (列表长按事件)
 	index: 0,           //数字类型；列表项的索引
 	btnIndex: 0         //数字类型；列表项侧滑出现的按钮的索引
 }
@@ -1140,3 +1147,7 @@ UIListView.setRefreshFooter({
 iOS系统，Android系统
  
 可提供的1.0.0及更高版本
+
+# 论坛示例
+
+为帮助用户更好更快的使用模块，论坛维护了一个[示例](https://community.apicloud.com/bbs/thread-115604-1-1.html)，示例中包含示例代码、知识点讲解、注意事项等，供您参考。

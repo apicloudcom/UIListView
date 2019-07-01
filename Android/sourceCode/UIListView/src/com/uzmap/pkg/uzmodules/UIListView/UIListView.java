@@ -28,6 +28,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.AdapterView.OnItemClickListener;
@@ -83,6 +84,8 @@ public class UIListView extends UZModule {
 	private static final String EVENT_TYPE_RIGHT_BTN_CLICK = "clickRightBtn";
 
 	private static final String EVENT_TYPE_ITEM_CLICK = "clickContent";
+	private static final String EVENT_TYPE_ITEM_LONG_CLICK = "longPress";
+	
 	public static final String EVENT_TYPE_ITEM_IMG_CLICK = "clickImg";
 	public static final String EVENT_TYPE_ITEM_REMARK_CLICK = "clickRemark"; 
 
@@ -156,6 +159,23 @@ public class UIListView extends UZModule {
 				if(mAdapter.getItemDatas().get(arg2).forbidden && mConfig.forbidenSideslip){
 					Utils.callback(moduleContext, EVENT_TYPE_ITEM_CLICK, arg2, -1);
 				}
+			}
+		});
+		
+		swipeListView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				
+				if(!mAdapter.getItemDatas().get(arg2).forbidden){
+					Utils.callback(moduleContext, EVENT_TYPE_ITEM_LONG_CLICK, arg2, -1);
+				}
+				
+				if(mAdapter.getItemDatas().get(arg2).forbidden && mConfig.forbidenSideslip){
+					Utils.callback(moduleContext, EVENT_TYPE_ITEM_LONG_CLICK, arg2, -1);
+				}
+				return true;
 			}
 		});
 

@@ -193,7 +193,6 @@ public class CustomListAdapter extends BaseAdapter {
 
 	@SuppressWarnings("deprecation")
 	public void setItemStyles(ViewHolder viewHolder, Config config) {
-
 		/**
 		 * item border set
 		 */
@@ -381,8 +380,7 @@ public class CustomListAdapter extends BaseAdapter {
 			break;
 		}
 
-		int space = (UZUtility.dipToPix(mConfig.itemHeight) - UZUtility
-				.dipToPix(mConfig.itemImgHeight)) / 2;
+		int space = (UZUtility.dipToPix(mConfig.itemHeight) - UZUtility.dipToPix(mConfig.itemImgHeight)) / 2;
 
 		// Title & SubTitle Set
 		viewHolder.mTitleTv.setText(itemData.title);
@@ -457,6 +455,17 @@ public class CustomListAdapter extends BaseAdapter {
 			viewHolder.mIconIv.setVisibility(View.GONE);
 			break;
 		}
+		
+		/**
+		 * XXX 防止标题和子标题与备注重叠
+		 */
+		
+		RelativeLayout.LayoutParams titleParams = (RelativeLayout.LayoutParams)viewHolder.mTitleTv.getLayoutParams();
+		RelativeLayout.LayoutParams subTitleParams = (RelativeLayout.LayoutParams)viewHolder.mSubTitleTv.getLayoutParams();
+		
+		titleParams.addRule(RelativeLayout.LEFT_OF, viewHolder.remarkGroupLayout.getId());
+		subTitleParams.addRule(RelativeLayout.LEFT_OF, viewHolder.remarkGroupLayout.getId());
+		
 	}
 	
 	public ViewHolder createViewHolder(View itemView) {

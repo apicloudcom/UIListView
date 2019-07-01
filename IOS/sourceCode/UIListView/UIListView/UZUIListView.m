@@ -11,7 +11,7 @@
 #import "TPGestureTableViewCell_UI.h"
 #import "UZUIRefreshTableHeaderView.h"
 #import "UZUIRefreshTableFooterView.h"
-#import "UIImageView+WebCache.h"
+//#import "UIImageView+WebCache.h"
 @interface UZUIListView ()
 <UITableViewDelegate,UITableViewDataSource, TPGestureTableViewCellDelegate, EGORefreshTableDelegate> {
     NSInteger cbID, refreshHeadcbid, refreshFootercbid;;
@@ -146,7 +146,9 @@
     //添加到指定窗口
     BOOL fixed = [paramsDict_ boolValueForKey:@"fixed" defaultValue:YES];
     [self addSubview:self.mainTableView fixedOn:viewName fixed:fixed];
+   [self view:self.mainTableView addConstraintsWithRect:rect];
     [self view:self.mainTableView preventSlidBackGesture:YES];
+
     
     //callback
     NSMutableDictionary *cbsenddict = [NSMutableDictionary dictionaryWithCapacity:1];
@@ -640,12 +642,12 @@
     NSString *headImg = [cellInfo stringValueForKey:@"imgPath" defaultValue:@""];
     if ([headImg hasPrefix:@"http"]||[headImg hasPrefix:@"https"]) {
         if (placeholdImg) {
-            [cell.iconImg sd_setImageWithURL:[NSURL URLWithString:headImg] placeholderImage:placeholdImg];
+            [cell.iconImg loadImage:headImg withPlaceholdImage:placeholdImg];
         } else {
             NSString *placeholdImgStr = [[NSBundle mainBundle]pathForResource:@"res_UIListView/apicloud" ofType:@"png"];
-            [cell.iconImg sd_setImageWithURL:[NSURL URLWithString:headImg] placeholderImage:[UIImage imageWithContentsOfFile:placeholdImgStr]];
-            
+            [cell.iconImg loadImage:headImg withPlaceholdImage:[UIImage imageWithContentsOfFile:placeholdImgStr]];
         }
+    
     }else {
         
         if ([self getPathWithUZSchemeURL:headImg]) {
@@ -792,9 +794,35 @@
     }
     cell.forbiddenClick = forbidden;
     
+    //添加长按手势
+    UILongPressGestureRecognizer * longPressGesture =[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(cellLongPress:)];
+    longPressGesture.minimumPressDuration=1.5f;//设置长按 时间
+    [cell addGestureRecognizer:longPressGesture];
+    
     return cell;
 }
+    
+-(void)cellLongPress:(UILongPressGestureRecognizer *)longRecognizer{
+    
+    
+    if (longRecognizer.state==UIGestureRecognizerStateBegan) {
+        //成为第一响应者，需重写该方法
+       // [self becomeFirstResponder];
+        CGPoint location = [longRecognizer locationInView:self.mainTableView];
+        NSIndexPath * indexPath = [self.mainTableView indexPathForRowAtPoint:location];
 
+
+        //可以得到此时你点击的哪一行
+        //在此添加你想要完成的功能
+        [self sendResultEventWithCallbackId:cbID dataDict:@{@"eventType":@"longPress",@"index":[NSString stringWithFormat:@"%ld",(long)indexPath.row]} errDict:nil doDelete:NO];
+    }
+    
+    
+}
+#pragma mark  实现成为第一响应者方法
+-(BOOL)canBecomeFirstResponder{
+    return YES;
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *cellInfo = [self.dataSource objectAtIndex:indexPath.row];
     BOOL forbidden = [cellInfo boolValueForKey:@"forbidden" defaultValue:NO];

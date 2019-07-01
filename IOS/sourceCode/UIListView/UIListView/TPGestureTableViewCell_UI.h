@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "AsyncImageViewD.h"
+#import "AsyncImageViewDX.h"
+
 typedef enum {
     kFeedStatusNormal = 0,
     kFeedStatusLeftExpanded,
@@ -39,7 +42,10 @@ typedef enum {
 @property (nonatomic,assign) float slipLeftDistance;
 @property (nonatomic, copy) NSArray *leftBtnUI;//左边的按钮
 @property (nonatomic, copy) NSArray *rightBtn;//右边的按钮
-@property (nonatomic, retain) UIImageView *iconImg;
+//@property (nonatomic, retain) UIImageView *iconImg;
+//@property (nonatomic, retain) AsyncImageViewD *iconImg;
+@property (nonatomic, retain) AsyncImageViewDX *iconImg;
+
 @property (nonatomic, retain) UILabel *titleLabel;
 @property (nonatomic, retain) UILabel *detailTextViewUI;
 @property (nonatomic, assign) NSInteger cellIndex;
